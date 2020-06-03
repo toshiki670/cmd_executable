@@ -1,4 +1,6 @@
-require "cmd_executable/version"
+# frozen_string_literal: true
+
+require 'cmd_executable/version'
 
 module CmdExecutable
   class Error < StandardError; end
