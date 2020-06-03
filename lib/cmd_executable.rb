@@ -3,6 +3,18 @@
 require 'English'
 require 'cmd_executable/version'
 
+# Command Executable
+#
+# Usage:
+#   require 'cmd_executable'
+#
+#   class Klass
+#     include 'CmdExecutable'
+#
+#     def instance_method
+#       executable?('ls')
+#     end
+#   end
 module CmdExecutable
   class CmdExecutableError < StandardError; end
 
