@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'cmd_executable'
+
 RSpec.describe CmdExecutable do
   class Klass
     include CmdExecutable
@@ -9,11 +11,11 @@ RSpec.describe CmdExecutable do
   describe '#executable?' do
     subject { instance }
     context 'With absolute path' do
-      let(:command) { '/usr/sbin/ls' }
+      let(:command) { '/bin/ls' }
       it { is_expected.to be_executable command }
     end
     context 'With invalid absolute path' do
-      let(:command) { '/usr/sbin/hoge_invalid' }
+      let(:command) { '/bin/hoge_invalid' }
       it { is_expected.to_not be_executable command }
     end
     context 'Without path' do
