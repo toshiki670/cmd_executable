@@ -30,7 +30,7 @@ jobs:
     - name: Install dependencies
       run: |
         bundle config set path 'vendor/bundle'
-        bundle install
+        bundle install --jobs=8
     - name: Create credentials
       run: |
         mkdir ~/.gem
