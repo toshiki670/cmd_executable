@@ -8,7 +8,6 @@ RSpec.describe CmdExecutable do
 
   describe '#executable?' do
     subject { instance }
-  
     context 'With absolute path' do
       let(:command) { '/usr/sbin/ls' }
       it { is_expected.to be_executable command }
