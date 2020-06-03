@@ -35,7 +35,7 @@ jobs:
       run: |
         mkdir ~/.gem
         echo '---' > ~/.gem/credentials
-        echo ":rubygems_api_key: $RUBYGEMS_API_ACCESS_KEY" > ~/.gem/credentials
+        echo ":rubygems_api_key: $RUBYGEMS_API_ACCESS_KEY" >> ~/.gem/credentials
         chmod 0600 ~/.gem/credentials
     - name: Setup git
       run: |
