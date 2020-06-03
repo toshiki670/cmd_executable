@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'cmd_executable'
+
 RSpec.describe CmdExecutable do
   class Klass
     include CmdExecutable
