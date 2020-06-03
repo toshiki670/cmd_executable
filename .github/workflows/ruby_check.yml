@@ -39,8 +39,10 @@ jobs:
       uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
       with:
         ruby-version: 2.7
+    - name: Set the bundle path
+      run: bundle config set path 'vendor/bundle'
     - name: Install dependencies
-      run: bundle install --path vendor/bundle
+      run: bundle install
     - name: Run rspec
       run: bundle exec rspec
 
@@ -55,7 +57,9 @@ jobs:
       uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
       with:
         ruby-version: 2.7
+    - name: Set the bundle path
+      run: bundle config set path 'vendor/bundle'
     - name: Install dependencies
-      run: bundle install --path vendor/bundle
+      run: bundle install
     - name: Run rubocop
       run: bundle exec rubocop
