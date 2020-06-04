@@ -9,12 +9,14 @@ Gem::Specification.new do |spec|
   spec.email         = ['toshiki.dev@protonmail.ch']
 
   spec.summary       = 'The command executable module.'
-  spec.description   = 'Please include CmdExecutable'
+  spec.description   = <<-'DESC'
+    This module adds a method "executable?(command)".
+    it's return true if given command usable on Linux.
+  DESC
+
   spec.homepage      = 'https://github.com/toshiki670/cmd_executable/wiki'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
-
-  spec.metadata['allowed_push_host'] = 'https://rubygems.org'
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/toshiki670/cmd_executable'
@@ -29,9 +31,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'pry'
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'bundler', '~> 2.1'
+  spec.add_development_dependency 'pry', '~> 0.13.1'
+  spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'rspec', '~> 3.9'
+  spec.add_development_dependency 'rubocop', '~> 0.85.0'
 end
