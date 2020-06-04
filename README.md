@@ -21,8 +21,17 @@ Or install it yourself as:
     $ gem install cmd_executable
 
 ## Usage
+```
+require 'cmd_executable'
 
-TODO: Write usage instructions here
+class Klass
+ include 'CmdExecutable'
+
+ def instance_method
+   executable?('ls')
+ end
+end
+```
 
 ## Development
 
