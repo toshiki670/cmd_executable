@@ -9,7 +9,11 @@ Gem::Specification.new do |spec|
   spec.email         = ['toshiki.dev@protonmail.ch']
 
   spec.summary       = 'The command executable module.'
-  spec.description   = 'Please include CmdExecutable'
+  spec.description   = <<-'DESC'
+    This module adds a method "executable?(command)".
+    it's return true if given command usable on Linux.
+  DESC
+
   spec.homepage      = 'https://github.com/toshiki670/cmd_executable/wiki'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
