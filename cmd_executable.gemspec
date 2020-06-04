@@ -14,8 +14,6 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
 
-  spec.metadata['allowed_push_host'] = 'https://rubygems.org'
-
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/toshiki670/cmd_executable'
   spec.metadata['changelog_uri'] = 'https://github.com/toshiki670/cmd_executable/releases'
