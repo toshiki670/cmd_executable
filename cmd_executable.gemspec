@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
     it's return true if given command usable on Linux.
   DESC
 
-  spec.homepage      = 'https://github.com/toshiki670/cmd_executable/wiki'
+  spec.homepage      = 'https://github.com/toshiki670/cmd_executable'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
 
