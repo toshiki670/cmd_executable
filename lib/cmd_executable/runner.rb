@@ -32,10 +32,11 @@ module CmdExecutable
   #   $ cmd_executable ls
   #   > OK
   class Runner < Thor
-    require 'cmd_executable'
+    include CmdExecutable
 
     default_command :cmd_executable
 
+    desc "Executable check", "install one of the available apps"
     def cmd_executable(path)
       p executable?(path)
     end
