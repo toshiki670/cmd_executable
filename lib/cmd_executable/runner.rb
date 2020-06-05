@@ -34,8 +34,10 @@ module CmdExecutable
   class Runner < Thor
     require 'cmd_executable'
 
-    def cmd_executable
-      nil
+    default_command :cmd_executable
+
+    def cmd_executable(path)
+      p executable?(path)
     end
   end
 end
