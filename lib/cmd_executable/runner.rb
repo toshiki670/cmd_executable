@@ -23,6 +23,7 @@
 # THE SOFTWARE.
 
 require 'cmd_executable'
+require 'thor'
 
 module CmdExecutable
   # CLI Runner
@@ -30,7 +31,7 @@ module CmdExecutable
   # Usage on CLI:
   #   $ cmd_executable ls
   #   > OK
-  class Runner
+  class Runner < Thor
     require 'cmd_executable'
 
     def cmd_executable
