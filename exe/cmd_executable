@@ -2,3 +2,5 @@
 # frozen_string_literal: true
 
 require 'cmd_executable'
+
+CmdExecutable::Runner.start(ARGV)
