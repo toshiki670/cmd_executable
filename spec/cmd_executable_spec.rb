@@ -27,10 +27,10 @@ RSpec.describe CmdExecutable do
         let(:command) { 'hoge_invalid' }
         it { is_expected.to_not be_executable command }
       end
-      context 'When symbol' do
-        let(:command) { :ls }
-        it { is_expected.to_not be_executable command }
-      end
+      # context 'When symbol' do
+      #   let(:command) { :ls }
+      #   it { is_expected.to_not be_executable command }
+      # end
     end
 
     describe 'Exception' do
