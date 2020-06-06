@@ -36,7 +36,7 @@ RSpec.describe CmdExecutable::Parser do
   end
 
   describe '#command' do
-    subject { -> { instance.command } }
+    subject { instance.command }
     describe 'Success' do
       context 'When absolute' do
         context 'path only' do
@@ -91,6 +91,7 @@ RSpec.describe CmdExecutable::Parser do
       end
     end
     describe 'Exception' do
+      subject { -> { instance.command } }
       # TODO: here are errors
     end
   end
