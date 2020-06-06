@@ -42,6 +42,8 @@ module CmdExecutable
   class CmdExecutableError < StandardError; end
 
   def executable?(command)
+    raise ArgumentError unless validate(command)
+
     path = File.split(command).yield_self do |dirname, basename|
       dirname = File.absolute_path?(dirname) ? dirname : ''
       dirname += File::SEPARATOR if dirname.rindex(File::SEPARATOR)
@@ -51,5 +53,13 @@ module CmdExecutable
     `type '#{path}' > /dev/null 2>&1`.yield_self do
       $CHILD_STATUS.success?
     end
+  end
+
+  private
+
+  def validate(command)
+    !command.nil? &&
+      command.is_a?(String) &&
+      !command.empty?
   end
 end
