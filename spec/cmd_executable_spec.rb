@@ -10,6 +10,16 @@ RSpec.describe CmdExecutable do
   end
   let(:instance) { Klass.new }
 
+  describe '.executable?' do
+    describe 'Success' do
+      subject { CmdExecutable }
+      context 'With absolute path' do
+        let(:command) { '/bin/ls' }
+        it { is_expected.to be_executable command }
+      end
+    end
+  end
+
   describe '#executable?' do
     describe 'Success' do
       subject { instance }
