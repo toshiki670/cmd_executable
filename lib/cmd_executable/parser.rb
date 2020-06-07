@@ -27,9 +27,11 @@ require 'English'
 module CmdExecutable
   class ParserError < StandardError; end
 
+  # Parser for CmdExecutable
   class Parser
     def initialize(raw)
       @raw = raw
+      @raw.freeze
     end
 
     def validate?
