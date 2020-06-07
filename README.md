@@ -26,11 +26,14 @@ Or install it yourself as:
 require 'cmd_executable'
 
 class Klass
- include 'CmdExecutable'
+  include CmdExecutable
 
- def instance_method
-   executable?('ls')
- end
+  def instance_method
+    executable?('/bin/ls')
+    executable?('ls')
+    executable?(:ls)
+    executable?('./bin/setup')
+  end
 end
 ```
 ### as CLI
