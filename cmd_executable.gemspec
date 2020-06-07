@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.homepage      = 'https://github.com/toshiki670/cmd_executable'
   spec.license       = 'MIT'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.7.0')
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/toshiki670/cmd_executable'
@@ -33,7 +33,10 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 2.1'
   spec.add_development_dependency 'pry', '~> 0.13.1'
+  spec.add_development_dependency 'pry-doc', '~> 1.1'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.9'
   spec.add_development_dependency 'rubocop', '~> 0.85.0'
+
+  spec.add_dependency 'thor', '~> 1.0'
 end

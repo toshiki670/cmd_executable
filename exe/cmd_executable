@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'cmd_executable'
+require 'cmd_executable/runner'
+
+CmdExecutable::Runner.start(ARGV)
