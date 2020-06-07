@@ -34,11 +34,24 @@ module CmdExecutable
   class Runner < Thor
     include CmdExecutable
 
-    default_command :cmd_executable
+    map '-c' => :check
 
-    desc "Executable check", "install one of the available apps"
-    def cmd_executable(path)
-      p executable?(path)
+    desc "-c [/path/to/command]", "It's return true if given command usable on Linux."
+    def check(command = '')
+      if executable?(command)
+        STDOUT.puts "OK"
+        exit 0
+      else
+        STDERR.puts "NOT FOUND"
+        exit 1
+      end
+    end
+
+    map %w(-v --version) => :version
+    desc '-v --version', 'Show version.'
+    def version
+      STDOUT.puts CmdExecutable::VERSION
+      exit 0
     end
   end
 end
