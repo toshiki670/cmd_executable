@@ -5,10 +5,22 @@ require 'cmd_executable/runner'
 RSpec.describe CmdExecutable::Runner do
   let(:instance) { CmdExecutable::Runner.new }
 
-  describe '#cmd_executable' do
-    subject { instance }
-    context do
-      it { is_expected.to be_truthy }
+  describe '#check' do
+    context 'When success' do
+      subject { instance.check("ls") }
+      it do
+        expect { subject }.to raise_error(SystemExit) do |res|
+          expect(res.status).to eq(0)
+        end
+      end
+    end
+    context 'When error' do
+      subject { instance.check("hoge_invalid") }
+      it do
+        expect { subject }.to raise_error(SystemExit) do |res|
+          expect(res.status).to eq(1)
+        end
+      end
     end
   end
 end
