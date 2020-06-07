@@ -23,6 +23,7 @@
 # THE SOFTWARE.
 
 require 'English'
+require 'cmd_executable/parser'
 require 'cmd_executable/runner'
 require 'cmd_executable/version'
 
@@ -42,24 +43,11 @@ module CmdExecutable
   class CmdExecutableError < StandardError; end
 
   def executable?(command)
-    raise ArgumentError unless validate(command)
+    parsed = CmdExecutable::Parser.new(command)
+    raise ArgumentError unless parsed.validate?
 
-    path = File.split(command).yield_self do |dirname, basename|
-      dirname = File.absolute_path?(dirname) ? dirname : ''
-      dirname += File::SEPARATOR if dirname.rindex(File::SEPARATOR)
-      dirname + basename.split.first
-    end
-
-    `type '#{path}' > /dev/null 2>&1`.yield_self do
+    `type '#{parsed.command}' > /dev/null 2>&1`.yield_self do
       $CHILD_STATUS.success?
     end
-  end
-
-  private
-
-  def validate(command)
-    !command.nil? &&
-      command.is_a?(String) &&
-      !command.empty?
   end
 end

@@ -2,6 +2,8 @@
 
 require 'cmd_executable'
 
+# rubocop:disable Metrics/BlockLength
+
 RSpec.describe CmdExecutable do
   class Klass
     include CmdExecutable
@@ -50,3 +52,5 @@ RSpec.describe CmdExecutable do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength
