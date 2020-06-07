@@ -43,6 +43,10 @@ module CmdExecutable
   class CmdExecutableError < StandardError; end
 
   def executable?(command)
+    CmdExecutable.executable?(command)
+  end
+
+  def self.executable?(command)
     parsed = CmdExecutable::Parser.new(command)
     raise ArgumentError unless parsed.validate?
 
