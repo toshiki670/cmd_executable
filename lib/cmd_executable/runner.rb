@@ -51,7 +51,6 @@ module CmdExecutable
     desc '-v --version', 'Show version.'
     def version
       STDOUT.puts CmdExecutable::VERSION
-      exit 0
     end
   end
 end
