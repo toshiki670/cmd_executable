@@ -33,7 +33,7 @@ require 'cmd_executable/version'
 #   require 'cmd_executable'
 #
 #   class Klass
-#     include 'CmdExecutable'
+#     include CmdExecutable
 #
 #     def instance_method
 #       executable?('ls')
