@@ -29,7 +29,10 @@ class Klass
   include CmdExecutable
 
   def instance_method
+    executable?('/bin/ls')
     executable?('ls')
+    executable?(:ls)
+    executable?('./bin/setup')
   end
 end
 ```
