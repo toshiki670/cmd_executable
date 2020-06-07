@@ -9,6 +9,7 @@ RSpec.describe CmdExecutable::Parser do
 
   describe '#validate?' do
     subject { instance }
+
     describe 'Success' do
       context 'When String' do
         let(:command) { '/bin/ls' }
@@ -19,6 +20,7 @@ RSpec.describe CmdExecutable::Parser do
         it { is_expected.to be_validate }
       end
     end
+
     describe 'Failure' do
       context 'When empty command' do
         let(:command) { '' }
@@ -36,8 +38,9 @@ RSpec.describe CmdExecutable::Parser do
   end
 
   describe '#command' do
-    subject { instance.command }
     describe 'Success' do
+      subject { instance.command }
+
       context 'When absolute' do
         context 'path only' do
           let(:command) { '/bin/ls' }
@@ -55,6 +58,7 @@ RSpec.describe CmdExecutable::Parser do
           it { is_expected.to eq result }
         end
       end
+
       context 'When relative' do
         context 'path only' do
           let(:command) { '../../bin/ls' }
@@ -72,6 +76,7 @@ RSpec.describe CmdExecutable::Parser do
           it { is_expected.to eq result }
         end
       end
+
       context 'When command' do
         context 'only' do
           let(:command) { 'ls' }
@@ -90,9 +95,22 @@ RSpec.describe CmdExecutable::Parser do
         end
       end
     end
+
     describe 'Exception' do
       subject { -> { instance.command } }
-      # TODO: here are errors
+
+      context 'When empty command' do
+        let(:command) { '' }
+        it { is_expected.to raise_error(CmdExecutable::ParserError) }
+      end
+      context 'When nil command' do
+        let(:command) { nil }
+        it { is_expected.to raise_error(CmdExecutable::ParserError) }
+      end
+      context 'When no string' do
+        let(:command) { 10 }
+        it { is_expected.to raise_error(CmdExecutable::ParserError) }
+      end
     end
   end
 end
