@@ -22,44 +22,35 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'English'
-require 'cmd_executable/runner'
-require 'cmd_executable/version'
+require 'cmd_executable'
+require 'thor'
 
-# Command Executable
-#
-# Usage:
-#   require 'cmd_executable'
-#
-#   class Klass
-#     include 'CmdExecutable'
-#
-#     def instance_method
-#       executable?('ls')
-#     end
-#   end
 module CmdExecutable
-  class CmdExecutableError < StandardError; end
+  # CLI Runner
+  #
+  # Usage on CLI:
+  #   $ cmd_executable ls
+  #   > OK
+  class Runner < Thor
+    include CmdExecutable
 
-  def executable?(command)
-    raise ArgumentError unless validate(command)
+    map '-c' => :check
 
-    path = File.split(command).yield_self do |dirname, basename|
-      dirname = File.absolute_path?(dirname) ? dirname : ''
-      dirname += File::SEPARATOR if dirname.rindex(File::SEPARATOR)
-      dirname + basename.split.first
+    desc '-c [/path/to/command]', "It's return true if given command usable on Linux."
+    def check(command = '')
+      if executable?(command)
+        puts 'OK'
+        exit 0
+      else
+        puts 'NOT FOUND'
+        exit 1
+      end
     end
 
-    `type '#{path}' > /dev/null 2>&1`.yield_self do
-      $CHILD_STATUS.success?
+    map %w[-v --version] => :version
+    desc '-v --version', 'Show version.'
+    def version
+      STDOUT.puts CmdExecutable::VERSION
     end
-  end
-
-  private
-
-  def validate(command)
-    !command.nil? &&
-      command.is_a?(String) &&
-      !command.empty?
   end
 end
