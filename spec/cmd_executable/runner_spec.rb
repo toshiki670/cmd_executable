@@ -7,7 +7,7 @@ RSpec.describe CmdExecutable::Runner do
 
   describe '#check' do
     context 'When success' do
-      subject { instance.check("ls") }
+      subject { instance.check('ls') }
       it do
         expect { subject }.to raise_error(SystemExit) do |res|
           expect(res.status).to eq(0)
@@ -15,7 +15,7 @@ RSpec.describe CmdExecutable::Runner do
       end
     end
     context 'When error' do
-      subject { instance.check("hoge_invalid") }
+      subject { instance.check('hoge_invalid') }
       it do
         expect { subject }.to raise_error(SystemExit) do |res|
           expect(res.status).to eq(1)

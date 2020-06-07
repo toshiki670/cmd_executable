@@ -36,18 +36,18 @@ module CmdExecutable
 
     map '-c' => :check
 
-    desc "-c [/path/to/command]", "It's return true if given command usable on Linux."
+    desc '-c [/path/to/command]', "It's return true if given command usable on Linux."
     def check(command = '')
       if executable?(command)
-        STDOUT.puts "OK"
+        puts 'OK'
         exit 0
       else
-        STDERR.puts "NOT FOUND"
+        puts 'NOT FOUND'
         exit 1
       end
     end
 
-    map %w(-v --version) => :version
+    map %w[-v --version] => :version
     desc '-v --version', 'Show version.'
     def version
       STDOUT.puts CmdExecutable::VERSION
