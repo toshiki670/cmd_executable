@@ -23,6 +23,7 @@
 # THE SOFTWARE.
 
 require 'English'
+require 'cmd_executable/parser'
 require 'cmd_executable/version'
 
 # Command Executable
