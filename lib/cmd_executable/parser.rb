@@ -54,45 +54,41 @@ module CmdExecutable
       raise CmdExecutable::ParserError unless validate?
 
       path = @raw.to_s.chomp
-      @dirname = Parser.parse_dirname(path)
-      @basename = Parser.parse_basename(path)
+      @dirname = parse_dirname(path)
+      @basename = parse_basename(path)
       @command = @dirname + @basename
-
       self
     end
 
+    def no_separator_at_the_right_end_regex
+      /(?<!#{File::SEPARATOR})\Z/
+    end
 
-    class << self
-      def no_separator_at_the_right_end_regex
-        /(?<!#{File::SEPARATOR})\Z/
-      end
+    def a_dot_only_regex
+      /\A\.\Z/
+    end
 
-      def a_dot_only_regex
-        /\A\.\Z/
-      end
+    def basename_exist?(path)
+      path.match?(no_separator_at_the_right_end_regex)
+    end
 
-      def basename_exist?(path)
-        path.match?(no_separator_at_the_right_end_regex)
-      end
+    def no_right_separator_exists?(dir)
+      dir.match?(no_separator_at_the_right_end_regex)
+    end
 
-      def no_right_separator_exists?(dir)
-        dir.match?(no_separator_at_the_right_end_regex)
-      end
+    def parse_dirname(path)
+      return path unless basename_exist?(path)
 
-      def parse_dirname(path)
-        return path unless basename_exist?(path)
+      dir = File.dirname(path)
+      return '' if dir.match?(a_dot_only_regex)
 
-        dir = File.dirname(path)
-        return '' if dir.match?(a_dot_only_regex)
+      no_right_separator_exists?(dir) ? (dir + File::SEPARATOR) : dir
+    end
 
-        no_right_separator_exists?(dir) ? (dir + File::SEPARATOR) : dir
-      end
+    def parse_basename(path)
+      return '' unless basename_exist?(path)
 
-      def parse_basename(path)
-        return '' unless basename_exist?(path)
-
-        File.basename(path).split.first
-      end
+      File.basename(path).split.first
     end
   end
 end
