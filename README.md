@@ -14,13 +14,14 @@ gem 'cmd_executable'
 
 And then execute:
 
-    $ bundle install
+    `$ bundle install`
 
 Or install it yourself as:
 
-    $ gem install cmd_executable
+    `$ gem install cmd_executable`
 
 ## Usage
+### as Module
 ```
 require 'cmd_executable'
 
@@ -32,6 +33,18 @@ class Klass
  end
 end
 ```
+### as CLI
+Check executable? :
+
+    `$ cmd_executable -c [/path/to/command]`
+    or
+    `$ cmd_executable -c [../path/to/command]`
+    or
+    `$ cmd_executable -c [command]`
+
+Show help :
+
+    `$ cmd_executable -h`
 
 ## Development
 
