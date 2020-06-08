@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'cmd_executable'
+require 'spec_helper'
 
 # rubocop:disable Metrics/BlockLength
 
@@ -9,6 +9,16 @@ RSpec.describe CmdExecutable do
     include CmdExecutable
   end
   let(:instance) { Klass.new }
+
+  describe '.executable?' do
+    describe 'Success' do
+      subject { CmdExecutable }
+      context 'With absolute path' do
+        let(:command) { '/bin/ls' }
+        it { is_expected.to be_executable command }
+      end
+    end
+  end
 
   describe '#executable?' do
     describe 'Success' do
@@ -29,10 +39,10 @@ RSpec.describe CmdExecutable do
         let(:command) { 'hoge_invalid' }
         it { is_expected.to_not be_executable command }
       end
-      # context 'When symbol' do
-      #   let(:command) { :ls }
-      #   it { is_expected.to_not be_executable command }
-      # end
+      context 'When symbol' do
+        let(:command) { :ls }
+        it { is_expected.to be_executable command }
+      end
     end
 
     describe 'Exception' do
