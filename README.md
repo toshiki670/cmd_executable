@@ -21,7 +21,7 @@ Or install it yourself as:
     `$ gem install cmd_executable`
 
 ## Usage
-### as Module
+### as Module (include)
 ```
 require 'cmd_executable'
 
@@ -36,6 +36,14 @@ class Klass
   end
 end
 ```
+### as Module method
+```
+CmdExecutable.executable?('/bin/ls')
+CmdExecutable.executable?('ls')
+CmdExecutable.executable?(:ls)
+CmdExecutable.executable?('./bin/setup')
+```
+
 ### as CLI
 Check executable? :
 
