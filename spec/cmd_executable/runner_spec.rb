@@ -4,7 +4,7 @@ require 'cmd_executable/runner'
 require 'English'
 
 RSpec.describe CmdExecutable::Runner do
-  # rubocop:disable Security/Eval
+  # rubocop:disable Security/Eval, Metrics/MethodLength
   def capture(stream)
     begin
       stream = stream.to_s
@@ -18,7 +18,7 @@ RSpec.describe CmdExecutable::Runner do
     end
     result
   end
-  # rubocop:enable Security/Eval
+  # rubocop:enable Security/Eval, Metrics/MethodLength
 
   let(:instance) { CmdExecutable::Runner.new }
 
