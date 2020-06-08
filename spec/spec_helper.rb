@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
+require 'English'
 require 'cmd_executable'
+require 'cmd_executable/parser'
+require 'cmd_executable/runner'
+require 'cmd_executable/version'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

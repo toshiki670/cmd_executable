@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'cmd_executable/runner'
-require 'English'
+require 'spec_helper'
 
 RSpec.describe CmdExecutable::Runner do
   # rubocop:disable Security/Eval, Metrics/MethodLength

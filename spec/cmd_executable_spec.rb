@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'cmd_executable'
+require 'spec_helper'
 
 # rubocop:disable Metrics/BlockLength
 
