@@ -17,11 +17,11 @@ module StreamCapture
   end
   # rubocop:enable Security/Eval, Metrics/MethodLength
 
-  def capture_stdout
-    capture(:stdout)
+  def capture_stdout(&block)
+    capture(:stdout, &block)
   end
 
-  def capture_stderr
-    capture(:stderr)
+  def capture_stderr(&block)
+    capture(:stderr, &block)
   end
 end
