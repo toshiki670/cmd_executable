@@ -50,7 +50,7 @@ module CmdExecutable
     map %w[-v --version] => :version
     desc '-v --version', 'Show version.'
     def version
-      STDOUT.puts CmdExecutable::VERSION
+      puts CmdExecutable::VERSION
     end
   end
 end
