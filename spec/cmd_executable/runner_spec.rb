@@ -4,20 +4,21 @@ require 'cmd_executable/runner'
 require 'English'
 
 RSpec.describe CmdExecutable::Runner do
+  # rubocop:disable Security/Eval
   def capture(stream)
     begin
       stream = stream.to_s
-      eval "$#{stream} = StringIO.new", binding, __FILE__, __LINE__
+      binding.eval("$#{stream} = StringIO.new", __FILE__, __LINE__)
       yield
-      result = eval("$#{stream}", binding, __FILE__, __LINE__).string
-    rescue SystemExit
-      result = eval("$#{stream}", binding, __FILE__, __LINE__).string
+    rescue SystemExit => e
+      puts e.status
     ensure
-      eval "$#{stream} = #{stream.upcase}", binding, __FILE__, __LINE__
+      result = binding.eval("$#{stream}", __FILE__, __LINE__).string
+      binding.eval("$#{stream} = #{stream.upcase}", __FILE__, __LINE__)
     end
-
     result
   end
+  # rubocop:enable Security/Eval
 
   let(:instance) { CmdExecutable::Runner.new }
 
