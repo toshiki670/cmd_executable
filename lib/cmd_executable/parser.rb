@@ -37,7 +37,8 @@ module CmdExecutable
     def validate?
       !@raw.nil? &&
         command_class_validate? &&
-        !@raw.empty?
+        !@raw.empty? &&
+        !include_invalid_char?
     end
 
     def command
@@ -50,6 +51,10 @@ module CmdExecutable
     def command_class_validate?
       @raw.is_a?(String) ||
         @raw.is_a?(Symbol)
+    end
+
+    def include_invalid_char?
+      @raw.match?(/\r\n|\r|\n/)
     end
 
     def parse

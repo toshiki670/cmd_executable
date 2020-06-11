@@ -34,6 +34,12 @@ RSpec.describe CmdExecutable::Parser do
         let(:command) { 10 }
         it { is_expected.to_not be_validate }
       end
+      context 'When linefeed' do
+        ["\r\n", "\r", "\n"].each do |rn|
+          let(:command) { rn }
+          it { is_expected.to_not be_validate }
+        end
+      end
     end
   end
 
