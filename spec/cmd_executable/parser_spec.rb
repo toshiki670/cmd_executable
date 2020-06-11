@@ -19,6 +19,12 @@ RSpec.describe CmdExecutable::Parser do
         let(:command) { :ls }
         it { is_expected.to be_validate }
       end
+      context 'When escape character' do
+        ['"'].each do |ec|
+          let(:command) { ec }
+          it { is_expected.to be_validate }
+        end
+      end
     end
 
     describe 'Failure' do
@@ -97,6 +103,11 @@ RSpec.describe CmdExecutable::Parser do
         context 'by Symbol' do
           let(:command) { :ls }
           let(:result)  { 'ls' }
+          it { is_expected.to eq result }
+        end
+        context 'include double quote' do
+          let(:command) { 'left"center"right' }
+          let(:result)  { 'left\"center\"right' }
           it { is_expected.to eq result }
         end
       end

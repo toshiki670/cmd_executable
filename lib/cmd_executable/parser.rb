@@ -60,7 +60,7 @@ module CmdExecutable
     def parse
       raise CmdExecutable::ParserError unless validate?
 
-      path = @raw.to_s.chomp
+      path = escape_char(@raw.to_s.chomp)
       @dirname = parse_dirname(path)
       @basename = parse_basename(path)
       @command = @dirname + @basename
@@ -96,6 +96,10 @@ module CmdExecutable
       return '' unless basename_exist?(path)
 
       File.basename(path).split.first
+    end
+
+    def escape_char(path)
+      path.gsub(/\"/, '\"')
     end
   end
 end

@@ -50,7 +50,7 @@ module CmdExecutable
     parsed = CmdExecutable::Parser.new(command)
     raise ArgumentError unless parsed.validate?
 
-    `type '#{parsed.command}' > /dev/null 2>&1`.yield_self do
+    `type "#{parsed.command}" > /dev/null 2>&1`.yield_self do
       $CHILD_STATUS.success?
     end
   end
