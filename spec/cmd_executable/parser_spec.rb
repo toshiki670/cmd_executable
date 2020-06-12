@@ -87,6 +87,11 @@ RSpec.describe CmdExecutable::Parser do
           let(:result)  { '../../bin/' }
           it { is_expected.to eq result }
         end
+        context 'when current path' do
+          let(:command) { './command' }
+          let(:result)  { './command' }
+          it { is_expected.to eq result }
+        end
       end
 
       context 'When command' do

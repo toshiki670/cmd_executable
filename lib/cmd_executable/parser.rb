@@ -75,6 +75,10 @@ module CmdExecutable
       /\A\.\Z/
     end
 
+    def current_path_at_the_left_regex
+      /\A\.\//
+    end
+
     def basename_exist?(path)
       path.match?(no_separator_at_the_right_end_regex)
     end
@@ -83,11 +87,15 @@ module CmdExecutable
       dir.match?(no_separator_at_the_right_end_regex)
     end
 
+    def current_path?(path)
+      path.match?(current_path_at_the_left_regex)
+    end
+
     def parse_dirname(path)
       return path unless basename_exist?(path)
 
       dir = File.dirname(path)
-      return '' if dir.match?(a_dot_only_regex)
+      return '' if dir.match?(a_dot_only_regex) && !current_path?(path)
 
       no_right_separator_exists?(dir) ? (dir + File::SEPARATOR) : dir
     end
