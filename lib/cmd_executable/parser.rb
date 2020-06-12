@@ -77,7 +77,7 @@ module CmdExecutable
     end
 
     def current_path_at_the_left_regex
-      /\A\.\//
+      %r{\A\./}
     end
 
     def basename_exist?(path)
@@ -108,7 +108,7 @@ module CmdExecutable
     end
 
     def escape_char(path)
-      path.gsub(/\"/, '\"')
+      path.gsub(/"/, '\"')
     end
   end
 end
