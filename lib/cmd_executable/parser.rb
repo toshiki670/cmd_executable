@@ -54,7 +54,8 @@ module CmdExecutable
     end
 
     def include_invalid_char?
-      @raw.match?(/\r\n|\r|\n/)
+      @raw.match?(/\r\n|\r|\n/) ||
+        @raw.match?(/\$\(.*\)/)
     end
 
     def parse

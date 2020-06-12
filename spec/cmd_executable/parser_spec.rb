@@ -40,6 +40,10 @@ RSpec.describe CmdExecutable::Parser do
         let(:command) { 10 }
         it { is_expected.to_not be_validate }
       end
+      context 'When include execute command' do
+        let(:command) { '/bin/$(mkdir file)/command' }
+        it { is_expected.to_not be_validate }
+      end
       context 'When linefeed' do
         ["\r\n", "\r", "\n"].each do |rn|
           let(:command) { rn }
