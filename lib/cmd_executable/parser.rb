@@ -77,7 +77,7 @@ module CmdExecutable
     end
 
     def current_path_at_the_left_regex
-      %r{\A\./}
+      /\A\.#{File::SEPARATOR}/
     end
 
     def basename_exist?(path)
