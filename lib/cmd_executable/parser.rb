@@ -37,7 +37,8 @@ module CmdExecutable
     def validate?
       !@raw.nil? &&
         command_class_validate? &&
-        !@raw.empty?
+        !@raw.empty? &&
+        !include_invalid_char?
     end
 
     def command
@@ -52,10 +53,15 @@ module CmdExecutable
         @raw.is_a?(Symbol)
     end
 
+    def include_invalid_char?
+      @raw.match?(/\r\n|\r|\n/) ||
+        @raw.match?(/\$\(.*\)/)
+    end
+
     def parse
       raise CmdExecutable::ParserError unless validate?
 
-      path = @raw.to_s.chomp
+      path = escape_char(@raw.to_s.chomp)
       @dirname = parse_dirname(path)
       @basename = parse_basename(path)
       @command = @dirname + @basename
@@ -70,6 +76,10 @@ module CmdExecutable
       /\A\.\Z/
     end
 
+    def current_path_at_the_left_regex
+      /\A\.#{File::SEPARATOR}/
+    end
+
     def basename_exist?(path)
       path.match?(no_separator_at_the_right_end_regex)
     end
@@ -78,11 +88,15 @@ module CmdExecutable
       dir.match?(no_separator_at_the_right_end_regex)
     end
 
+    def current_path?(path)
+      path.match?(current_path_at_the_left_regex)
+    end
+
     def parse_dirname(path)
       return path unless basename_exist?(path)
 
       dir = File.dirname(path)
-      return '' if dir.match?(a_dot_only_regex)
+      return '' if dir.match?(a_dot_only_regex) && !current_path?(path)
 
       no_right_separator_exists?(dir) ? (dir + File::SEPARATOR) : dir
     end
@@ -91,6 +105,10 @@ module CmdExecutable
       return '' unless basename_exist?(path)
 
       File.basename(path).split.first
+    end
+
+    def escape_char(path)
+      path.gsub(/"/, '\"')
     end
   end
 end

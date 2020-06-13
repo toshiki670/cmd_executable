@@ -19,6 +19,12 @@ RSpec.describe CmdExecutable::Parser do
         let(:command) { :ls }
         it { is_expected.to be_validate }
       end
+      context 'When escape character' do
+        ['"', "'"].each do |ec|
+          let(:command) { ec }
+          it { is_expected.to be_validate }
+        end
+      end
     end
 
     describe 'Failure' do
@@ -33,6 +39,16 @@ RSpec.describe CmdExecutable::Parser do
       context 'When no string' do
         let(:command) { 10 }
         it { is_expected.to_not be_validate }
+      end
+      context 'When include execute command' do
+        let(:command) { '/bin/$(mkdir file)/command' }
+        it { is_expected.to_not be_validate }
+      end
+      context 'When linefeed' do
+        ["\r\n", "\r", "\n"].each do |rn|
+          let(:command) { rn }
+          it { is_expected.to_not be_validate }
+        end
       end
     end
   end
@@ -75,6 +91,11 @@ RSpec.describe CmdExecutable::Parser do
           let(:result)  { '../../bin/' }
           it { is_expected.to eq result }
         end
+        context 'when current path' do
+          let(:command) { './command' }
+          let(:result)  { './command' }
+          it { is_expected.to eq result }
+        end
       end
 
       context 'When command' do
@@ -91,6 +112,11 @@ RSpec.describe CmdExecutable::Parser do
         context 'by Symbol' do
           let(:command) { :ls }
           let(:result)  { 'ls' }
+          it { is_expected.to eq result }
+        end
+        context 'include double quote' do
+          let(:command) { %q(abc"def'ghi"jkl'mno) }
+          let(:result)  { %q(abc\"def'ghi\"jkl'mno) }
           it { is_expected.to eq result }
         end
       end
