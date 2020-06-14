@@ -59,7 +59,7 @@ module CmdExecutable
     end
 
     def parse
-      raise CmdExecutable::ParserError unless validate?
+      raise CmdExecutable::ParserError, @raw unless validate?
 
       path = escape_char(@raw.to_s.chomp)
       @dirname = parse_dirname(path)
