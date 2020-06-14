@@ -34,6 +34,10 @@ module CmdExecutable
   class Runner < Thor
     include CmdExecutable
 
+    def self.exit_on_failure?
+      true
+    end
+
     map '-c' => :check
 
     desc '-c [/path/to/command]', "It's return true if given command usable on Linux."
@@ -45,6 +49,9 @@ module CmdExecutable
         puts 'NOT FOUND'
         exit 1
       end
+    rescue CmdExecutable::ParserError => e
+      warn "Invalid command: `#{e.message}'"
+      exit 16
     end
 
     map %w[-v --version] => :version
