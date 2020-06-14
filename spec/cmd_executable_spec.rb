@@ -49,15 +49,15 @@ RSpec.describe CmdExecutable do
       subject { -> { instance.executable?(command) } }
       context 'When empty command' do
         let(:command) { '' }
-        it { is_expected.to raise_error(ArgumentError) }
+        it { is_expected.to raise_error(CmdExecutable::ParserError) }
       end
       context 'When nil command' do
         let(:command) { nil }
-        it { is_expected.to raise_error(ArgumentError) }
+        it { is_expected.to raise_error(CmdExecutable::ParserError) }
       end
       context 'When no string' do
         let(:command) { 10 }
-        it { is_expected.to raise_error(ArgumentError) }
+        it { is_expected.to raise_error(CmdExecutable::ParserError) }
       end
     end
   end

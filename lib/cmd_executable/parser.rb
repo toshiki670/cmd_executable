@@ -29,6 +29,8 @@ module CmdExecutable
 
   # Parser for CmdExecutable
   class Parser
+    attr_reader :raw
+
     def initialize(raw)
       @raw = raw
       @raw.freeze

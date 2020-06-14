@@ -11,7 +11,7 @@ RSpec.describe CmdExecutable::Runner do
       it { is_expected.to match(/OK/) }
       it { expect(subject.yield_self { $CHILD_STATUS }).to be_success }
     end
-    context 'When error' do
+    context 'When failed' do
       subject { instance.check('hoge_invalid') }
       subject { capture_stdout { CmdExecutable::Runner.start(%w[-c hoge_invalid]) } }
       it { is_expected.to match(/NOT FOUND/) }

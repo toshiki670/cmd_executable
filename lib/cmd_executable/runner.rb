@@ -49,6 +49,9 @@ module CmdExecutable
         puts 'NOT FOUND'
         exit 1
       end
+    rescue CmdExecutable::ParserError => e
+      warn "Invalid command: `#{e.message}'"
+      exit 16
     end
 
     map %w[-v --version] => :version
