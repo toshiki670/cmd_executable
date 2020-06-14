@@ -14,6 +14,12 @@ RSpec.describe CmdExecutable::Runner do
       it { is_expected.to match(/NOT FOUND/) }
       it { expect(subject.yield_self { $CHILD_STATUS }).not_to be_success }
     end
+    context 'When error' do
+      subject { capture_stderr { CmdExecutable::Runner.start(%w[-c /path/to/$(ls)/command]) } }
+      it { is_expected.to match(/Invalid command:/) }
+      it { is_expected.to match(%r{`/path/to/\$\(ls\)/command'}) }
+      it { expect(subject.yield_self { $CHILD_STATUS }).not_to be_success }
+    end
   end
 
   describe '#version' do
