@@ -29,6 +29,8 @@ module CmdExecutable
 
   # Parser for CmdExecutable
   class Parser
+    attr_reader :raw
+
     def initialize(raw)
       @raw = raw
       @raw.freeze
@@ -59,7 +61,7 @@ module CmdExecutable
     end
 
     def parse
-      raise CmdExecutable::ParserError unless validate?
+      raise CmdExecutable::ParserError, @raw unless validate?
 
       path = escape_char(@raw.to_s.chomp)
       @dirname = parse_dirname(path)

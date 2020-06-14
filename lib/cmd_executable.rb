@@ -48,7 +48,7 @@ module CmdExecutable
 
   def self.executable?(command)
     parsed = CmdExecutable::Parser.new(command)
-    raise ArgumentError unless parsed.validate?
+    raise CmdExecutable::ParserError, parsed.raw unless parsed.validate?
 
     `type "#{parsed.command}" > /dev/null 2>&1`.yield_self do
       $CHILD_STATUS.success?
