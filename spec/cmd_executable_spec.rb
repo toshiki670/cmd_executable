@@ -4,10 +4,11 @@ require 'spec_helper'
 
 # rubocop:disable Metrics/BlockLength
 
+class Klass
+  include CmdExecutable
+end
+
 RSpec.describe CmdExecutable do
-  class Klass
-    include CmdExecutable
-  end
   let(:instance) { Klass.new }
 
   describe '.executable?' do
